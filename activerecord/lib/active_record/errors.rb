@@ -383,6 +383,7 @@ module ActiveRecord
   class Deadlocked < TransactionRollbackError
   end
 
+
   # IrreversibleOrderError is raised when a relation's order is too complex for
   # +reverse_order+ to automatically reverse.
   class IrreversibleOrderError < ActiveRecordError
@@ -394,6 +395,13 @@ module ActiveRecord
 
   # LockWaitTimeout will be raised when lock wait timeout exceeded.
   class LockWaitTimeout < StatementInvalid
+  end
+
+  # ReleaseAdvisoryLockError will be raised when a advisory lock fail to be released.
+  class ReleaseAdvisoryLockError < StatementInvalid
+    def initialize(message = "Failed to release advisory lock")
+      super
+    end
   end
 
   # StatementTimeout will be raised when statement timeout exceeded.
